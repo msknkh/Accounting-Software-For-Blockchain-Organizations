@@ -26,6 +26,16 @@ const _nav = [
     },
   },
   {
+    component: CNavItem,
+    name: 'Mainpage',
+    to: '/mainpage',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    },
+  },
+  {
     component: CNavTitle,
     name: 'Theme',
   },
