@@ -1,4 +1,5 @@
 // Here you can add other styles
+@use "sass:map";
 
 $colors: (
     violet: #b224ef,
@@ -15,6 +16,38 @@ $colors: (
     
 );
 
-.tag-grant {
+img.navbarIcon {
+    max-width: 20px;
+    max-height: 20px;
+    margin-right: 10px;
+}
 
+.sidebar-nav .nav-title{
+    font-size: 15px;
+    color: map.get($colors, white);
+    text-transform: none;
+}
+
+
+.sidebar-nav .nav-link.active  {
+    background-color: map.get($colors, purple);
+    border-radius: 5px;
+    height: 30px;
+}
+
+.nav-link{
+    font-size: 15px;
+    color: map.get($colors, white);
+    height: 36px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.sidebar {
+    background-color: map.get($colors, black);
+}
+
+img.sidebar-logo-full {
+    width: 80%;
 }
