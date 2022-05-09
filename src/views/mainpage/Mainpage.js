@@ -1,6 +1,5 @@
-import React from 'react'
-import { useState } from "react";
-
+/* eslint-disable */
+import { useState } from 'react'
 
 import {
   CAvatar,
@@ -14,7 +13,7 @@ import {
   CButton,
   CListGroup,
   CListGroupItem,
-  CFormSelect
+  CFormSelect,
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -41,12 +40,10 @@ import avatar4 from 'src/assets/images/avatars/4.jpg'
 import avatar5 from 'src/assets/images/avatars/5.jpg'
 import avatar6 from 'src/assets/images/avatars/6.jpg'
 
-import Multiselect from 'multiselect-react-dropdown';
+import Multiselect from 'multiselect-react-dropdown'
 
 const Mainpage = () => {
-
-  const [value, setValue] = React.useState([]);
-   
+  const [value, setValue] = useState([])
   const tableExample = [
     {
       avatar: { src: avatar1, status: 'success' },
@@ -144,21 +141,19 @@ const Mainpage = () => {
     },
   ]
 
-  const [food, setFood] = useState(["Grant", "Payout", "Expense"]);
-
+  const [food, setFood] = useState(['Grant', 'Payout', 'Expense'])
 
   return (
     <>
-
-    <CFormSelect 
-    aria-label="Default select example"
-    options={[
+      <CFormSelect
+      aria-label="Default select example"
+      options={[
         'Open this select menu',
         { label: 'One', value: '1' },
         { label: 'Two', value: '2' },
         { label: 'Three', value: '3', disabled: true }
-    ]}
-    />
+      ]}
+      />
       <Multiselect
         isObject={false}
         onRemove={(event) => {
