@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import {
   CAvatar,
@@ -14,6 +14,10 @@ import {
   CListGroup,
   CListGroupItem,
   CFormSelect,
+  CFormInput,
+  CContainer,
+  CRow,
+  CCol
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -40,132 +44,242 @@ import avatar4 from 'src/assets/images/avatars/4.jpg'
 import avatar5 from 'src/assets/images/avatars/5.jpg'
 import avatar6 from 'src/assets/images/avatars/6.jpg'
 
-import Multiselect from 'multiselect-react-dropdown'
+import { MultiSelect } from "react-multi-select-component";
+import CreatableSelect from 'react-select/creatable';
+
+const tableExample1 = [
+  {
+    avatar: { src: avatar1, status: 'success' },
+    user: {
+      name: 'Yiorgos Avraamu',
+      new: true,
+      registered: 'Jan 1, 2021',
+    },
+    country: { name: 'USA', flag: cifUs },
+    usage: {
+      value: 50,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      color: 'success',
+    },
+    payment: { name: 'Mastercard', icon: cibCcMastercard },
+    activity: '10 sec ago',
+    tags: [{ tag: 'Grant' }, { tag: 'Income' }],
+  },
+  {
+    avatar: { src: avatar2, status: 'danger' },
+    user: {
+      name: 'Avram Tarasios',
+      new: false,
+      registered: 'Jan 1, 2021',
+    },
+    country: { name: 'Brazil', flag: cifBr },
+    usage: {
+      value: 22,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      color: 'info',
+    },
+    payment: { name: 'Visa', icon: cibCcVisa },
+    activity: '5 minutes ago',
+    tags: [{ tag: 'Grant' }, { tag: 'Income' }],
+  },
+  {
+    avatar: { src: avatar3, status: 'warning' },
+    user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
+    country: { name: 'India', flag: cifIn },
+    usage: {
+      value: 74,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      color: 'warning',
+    },
+    payment: { name: 'Stripe', icon: cibCcStripe },
+    activity: '1 hour ago',
+    tags: [{ tag: 'Grant' }, { tag: 'Income' }],
+  },
+  {
+    avatar: { src: avatar4, status: 'secondary' },
+    user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
+    country: { name: 'France', flag: cifFr },
+    usage: {
+      value: 98,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      color: 'danger',
+    },
+    payment: { name: 'PayPal', icon: cibCcPaypal },
+    activity: 'Last month',
+    tags: [{ tag: 'Grant' }, { tag: 'Income' }],
+  },
+  {
+    avatar: { src: avatar5, status: 'success' },
+    user: {
+      name: 'Agapetus Tadeáš',
+      new: true,
+      registered: 'Jan 1, 2021',
+    },
+    country: { name: 'Spain', flag: cifEs },
+    usage: {
+      value: 22,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      color: 'primary',
+    },
+    payment: { name: 'Google Wallet', icon: cibCcApplePay },
+    activity: 'Last week',
+    tags: [{ tag: 'Grant' }, { tag: 'Income' }],
+  },
+  {
+    avatar: { src: avatar6, status: 'danger' },
+    user: {
+      name: 'Friderik Dávid',
+      new: true,
+      registered: 'Jan 1, 2021',
+    },
+    country: { name: 'Poland', flag: cifPl },
+    usage: {
+      value: 43,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      color: 'success',
+    },
+    payment: { name: 'Amex', icon: cibCcAmex },
+    activity: 'Last week',
+    tags: [{ tag: 'Grant' }, { tag: 'Income' }, {tag: 'Payment'}],
+  },
+]
 
 const Mainpage = () => {
-  const [value, setValue] = useState([])
-  const tableExample = [
-    {
-      avatar: { src: avatar1, status: 'success' },
-      user: {
-        name: 'Yiorgos Avraamu',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-      tags: [{ tag: 'Grant' }, { tag: 'Income' }],
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Avram Tarasios',
-        new: false,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-      tags: [{ tag: 'Grant' }, { tag: 'Income' }],
-    },
-    {
-      avatar: { src: avatar3, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-      tags: [{ tag: 'Grant' }, { tag: 'Income' }],
-    },
-    {
-      avatar: { src: avatar4, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-      tags: [{ tag: 'Grant' }, { tag: 'Income' }],
-    },
-    {
-      avatar: { src: avatar5, status: 'success' },
-      user: {
-        name: 'Agapetus Tadeáš',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-      tags: [{ tag: 'Grant' }, { tag: 'Income' }],
-    },
-    {
-      avatar: { src: avatar6, status: 'danger' },
-      user: {
-        name: 'Friderik Dávid',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-      tags: [{ tag: 'Grant' }, { tag: 'Income' }],
-    },
-  ]
 
-  const [food, setFood] = useState(['Grant', 'Payout', 'Expense'])
+  const [tableExample, setTableExample] = useState(tableExample1);
+
+  //The filter states
+  const [walletAddresses, setWalletAddresses] = useState([])
+  const [newWalletAddress, setNewWalletAddress] = useState({NewAddressChain: "Hedera"});
+  const [tags, setTags] = useState([]);
+  const [coins, setCoins] = useState([])
+  const [senderAddresses, setSenderAddresses] = useState([]);
+  const [reciepientAddresses, setReciepientAddresses] = useState([]);
+
+  //Tag addition states
+  const [tag, setTag] = useState()
+
+  useEffect(() => {
+
+  }, [tableExample])
+  
+
+  console.log(tags);
+  console.log(coins);
+  console.log(senderAddresses);
+  console.log(reciepientAddresses);
+  console.log(newWalletAddress);
+  console.log(walletAddresses);
+
+  const handleChange = (e) => {
+    const value = e.target.value
+    const name = e.target.name
+
+    setNewWalletAddress((prevState) => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
+  const handleAddressSubmit = (e) => {
+    e.preventDefault();
+    setWalletAddresses(walletAddresses => [...walletAddresses, newWalletAddress]);
+  }
+
+  //Tag Addition Logic
+  const handleTagChange = (e) => {
+    const value = e.target.value
+    setTag(value);
+  }
+
+  const handleTagAddition = (e) => {
+    e.preventDefault();
+    if (tag) {
+      const index = e.target.id;
+      console.log(index)
+      tableExample[index].tags.push({tag: tag})
+      console.log(tableExample[index].tags);
+    }
+  }
+
+  console.log(tag)
 
   return (
     <>
-      <CFormSelect
-      aria-label="Default select example"
-      options={[
-        'Open this select menu',
-        { label: 'One', value: '1' },
-        { label: 'Two', value: '2' },
-        { label: 'Three', value: '3', disabled: true }
-      ]}
-      />
-      <Multiselect
-        isObject={false}
-        onRemove={(event) => {
-          console.log(event);
-        }}
-        onSelect={(event) => {
-          console.log(event);
-        }}
-        options={food}
-        selectedValues={["Grant"]}
-        showCheckbox
-      />
+      <CContainer>
+        <CRow>
+          <CCol sm="auto">{walletAddresses[0] ? walletAddresses[0].NewAddressChain : "Chain"}</CCol>
+          <CCol sm="auto">{walletAddresses[0] ? walletAddresses[0].NewAddress : "Address"}</CCol>
+          <CCol sm="auto">Add Address</CCol>
+          <CCol sm="auto">
+            <CFormSelect
+              placeholder="Select Chain"
+              aria-label="Default select example"
+              options={['Hedera', 'Ethereum',]}
+              name="NewAddressChain"
+              onChange={handleChange}
+            />
+          </CCol>
+          <CCol sm="auto">
+            <CFormInput 
+              type="text" 
+              placeholder="Enter address" 
+              aria-label="default input example"
+              name="NewAddress"
+              onChange={handleChange}
+            />
+          </CCol>
+          <CCol>
+            <CButton color="info" onClick={handleAddressSubmit}>Add Address</CButton>
+          </CCol>
+        </CRow>
+      </CContainer>
+
+      <CContainer>
+        <CRow>
+          <CCol sm="auto">Filter:</CCol>
+          <CCol sm="auto">
+          <CreatableSelect
+            isMulti
+            onChange={setTags}
+            options={[]}
+            placeholder="Add tags" 
+          />
+          </CCol>
+          <CCol sm="auto">
+          <CreatableSelect
+            isMulti
+            onChange={setCoins}
+            options={[]}
+            placeholder="Add coins" 
+          />
+          </CCol>
+          <CCol sm="auto">
+          <CreatableSelect
+            isMulti
+            onChange={setSenderAddresses}
+            options={[]}
+            placeholder="Add sender addresses" 
+          />
+          </CCol>
+          <CCol sm="auto">
+          <CreatableSelect
+            isMulti
+            onChange={setReciepientAddresses}
+            options={[]}
+            placeholder="Add receiver addresses" 
+          />
+          </CCol>     
+        </CRow>
+      </CContainer>
+
+      <CContainer>
+        <CRow>
+          <CCol sm="auto">All Transactions</CCol>
+        </CRow>
+      </CContainer>
+
+
 
       <CTable align="middle" className="mb-0 border" hover responsive>
         <CTableHead color="light">
@@ -223,6 +337,20 @@ const Mainpage = () => {
                 {item.tags[1] && <CButton color="primary" disabled>
                   {item.tags[1].tag}
                 </CButton>}
+                {item.tags[2] && <CButton color="primary" disabled>
+                  {item.tags[2].tag}
+                </CButton>}
+                {item.tags[3] && <CButton color="primary" disabled>
+                  {item.tags[3].tag}
+                </CButton>}
+                <CFormInput 
+                  type="text" 
+                  placeholder="Enter Tag" 
+                  aria-label="default input example"
+                  name="NewTag"
+                  onChange={handleTagChange}
+                />
+                <CButton id={index} color="info" onClick={handleTagAddition}>Add New Tag</CButton>
               </CTableDataCell>
             </CTableRow>
           ))}
