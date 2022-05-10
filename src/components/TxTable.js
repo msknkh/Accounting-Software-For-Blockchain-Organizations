@@ -74,6 +74,7 @@ const TxTable = (props) => {
                 symbol: '',
                 address: '',
             }
+            let txTypes = new Set()
             for(let i = 0; i < txData.from.length; i++){
                 if (!(txData.tags[i].includes('Ignore'))){
                     senders.add(txData.from[i])
@@ -104,22 +105,32 @@ const TxTable = (props) => {
             }
 
             result.usdAmountThen = result.coinAmount
+            result.tags.push(txData.txType)
 
             return result
+        },
+        getTagColor: (name) => {
+            let colors = ['#28456c', '#89632a', '#69314c', '#373737', '#603b2c', '#854c1d', '#492f64', '#2b593f', '#6e3630', '#5a5a5a'];
+            let x = 0;
+            for (let c of name) 
+                x += (c.charCodeAt(0));
+            
+            // while (x%10 == 0) {x = Math.floor(x/10);}
+
+            return colors[x%10];
         }
     }
 
     return (
         <>
             <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead color="light">
-                    <CTableRow>
-                    <CTableHeaderCell className="lorge-col">Transaction Hash</CTableHeaderCell>
-                    <CTableHeaderCell className="smol-col">From</CTableHeaderCell>
-                    <CTableHeaderCell className="smol-col">To</CTableHeaderCell>
-                    <CTableHeaderCell className="lorge-col">Coins</CTableHeaderCell>
-                    <CTableHeaderCell className="smol-col">Coin Amount</CTableHeaderCell>
-                    <CTableHeaderCell className="lorge-col">
+                <CTableHead>
+                    <CTableHeaderCell className="lorge-col" scope="col">Transaction Hash</CTableHeaderCell>
+                    <CTableHeaderCell className="smol-col" scope="col">From</CTableHeaderCell>
+                    <CTableHeaderCell className="smol-col" scope="col">To</CTableHeaderCell>
+                    <CTableHeaderCell className="lorge-col" scope="col">Coins</CTableHeaderCell>
+                    <CTableHeaderCell className="smol-col" scope="col">Coin Amount</CTableHeaderCell>
+                    <CTableHeaderCell className="lorge-col" scope="col">
                         {  
                             <div className='text-with-button'>
                                 <div className='text-with-button'><p>Amount In USD</p></div>
@@ -127,54 +138,137 @@ const TxTable = (props) => {
                             </div>
                         }
                     </CTableHeaderCell>
-                    <CTableHeaderCell className="tags-col">Tags</CTableHeaderCell>
-                    </CTableRow>
+                    <CTableHeaderCell className="tags-col" scope="col">Tags</CTableHeaderCell>
                 </CTableHead>
                 <CTableBody>
                     {
                         Object.entries(data).map(([parentTxHash, parentTxObj], pIndex) => {
                             const aggregateData = util.aggregateTxData(parentTxObj)
                             return (
-                                <CTableRow v-for="item in tableItems" key={pIndex}>
-                                    <CTableDataCell className="lorge-col">
-                                        <a 
-                                            className='etherscan-link' 
-                                            href={parentTxObj.explorerURLTx + parentTxHash}
-                                            target='_blank'
-                                        >
-                                            {util.txHashShorten(parentTxHash)}
-                                        </a>
-                                    </CTableDataCell>
-                                    <CTableDataCell className="smol-col">
-                                        <p>{aggregateData.froms} unique addr.</p>
-                                    </CTableDataCell>
-                                    <CTableDataCell className="smol-col">
-                                        <p>{aggregateData.tos} unique addr.</p>
-                                    </CTableDataCell>
-                                    <CTableDataCell className="lorge-col">
-                                        {aggregateData.coins.map((coinObj, index) => (
+                                <>
+                                    <CTableRow v-for="item in tableItems" key={pIndex}>
+                                        <CTableDataCell className="lorge-col">
                                             <a 
-                                                href={(coinObj.address !== '')?(parentTxObj.explorerURLAddress + coinObj.address):(props.address)} 
-                                                target="_blank"
+                                                className='etherscan-link' 
+                                                href={parentTxObj.explorerURLTx + parentTxHash}
+                                                target='_blank'
                                             >
-                                                <img className="tx-coin-img" src={coinImages[coinObj.name]} alt={coinObj.name} />
+                                                {util.txHashShorten(parentTxHash)}
                                             </a>
-                                        ))}
-                                    </CTableDataCell>
-                                    <CTableDataCell className="smol-col">
-                                        <p>{aggregateData.coinAmount}</p>
-                                    </CTableDataCell>
-                                    <CTableDataCell className="lorge-col">
-                                        <p>{aggregateData.usdAmountThen}</p>
-                                    </CTableDataCell>
-                                    <CTableDataCell className="tags-col">
-                                        <div style={{display: 'flex', flexDirection: 'row'}}>
-                                            {aggregateData.tags.map((tag, index) => (
-                                                <div className='tag-in-table'>{tag}</div>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="smol-col">
+                                            <p>{aggregateData.froms} unique addr.</p>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="smol-col">
+                                            <p>{aggregateData.tos} unique addr.</p>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="lorge-col">
+                                            {aggregateData.coins.map((coinObj, index) => (
+                                                <a 
+                                                    href={(coinObj.address !== '')?(parentTxObj.explorerURLAddress + coinObj.address):(props.address)} 
+                                                    target="_blank"
+                                                >
+                                                    <img className="tx-coin-img" src={coinImages[coinObj.name]} alt={coinObj.name} />
+                                                </a>
                                             ))}
-                                        </div>
-                                    </CTableDataCell>
-                                </CTableRow>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="smol-col">
+                                            <p>{aggregateData.coinAmount}</p>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="lorge-col">
+                                            <p>{aggregateData.usdAmountThen}</p>
+                                        </CTableDataCell>
+                                        <CTableDataCell className="tags-col">
+                                            <div style={{display: 'flex', flexDirection: 'row'}}>
+                                                {aggregateData.tags.map((tag, index) => {
+                                                    let tagColor = util.getTagColor(tag)
+                                                    return (
+                                                        <div 
+                                                            className='tag-in-table'
+                                                            style={{backgroundColor: tagColor}}
+                                                        >
+                                                            {tag}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </CTableDataCell>
+                                    </CTableRow>
+                                    <CTableRow>
+                                        <CTableHeaderCell colSpan="12">
+                                            <CTable>
+                                                <CTableHead>
+                                                <CTableRow>
+                                                    <CTableHeaderCell scope="col">From</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col">To</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col">Token</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col">USD Amount</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col">Tags</CTableHeaderCell>
+                                                </CTableRow>
+                                                </CTableHead>
+                                                <CTableBody>
+                                                    {parentTxObj.from.map((fromAddress, cIndex) => {
+                                                        let toAddress = parentTxObj.to[cIndex]
+                                                        let tokenSymbol = parentTxObj.tokenSymbol[cIndex].toUpperCase()
+                                                        let tokenAddress = parentTxObj.tokenAddress[cIndex]
+                                                        let tokenAmount = parentTxObj.tokenTransfers[cIndex]
+                                                        let usdAmount = parentTxObj.tokenTransfers[cIndex]
+                                                        let tags = parentTxObj.tags[cIndex]
+                                                        if (tags[0] === "Ignore") return (<></>)
+                                                        return (
+                                                            <CTableRow>
+                                                                <CTableHeaderCell className="lorge-col">
+                                                                    <a 
+                                                                        className='etherscan-link' 
+                                                                        href={parentTxObj.explorerURLAddress + fromAddress}
+                                                                        target='_blank'
+                                                                    >
+                                                                        {util.addressShorten(fromAddress)}
+                                                                    </a>
+                                                                </CTableHeaderCell>
+                                                                <CTableHeaderCell className="lorge-col">
+                                                                    <a 
+                                                                        className='etherscan-link' 
+                                                                        href={parentTxObj.explorerURLAddress + toAddress}
+                                                                        target='_blank'
+                                                                    >
+                                                                        {util.addressShorten(toAddress)}
+                                                                    </a>
+                                                                </CTableHeaderCell>
+                                                                <CTableHeaderCell scope="row">
+                                                                    <a 
+                                                                        href={(tokenAddress !== '')?(parentTxObj.explorerURLAddress + tokenAddress):(props.address)} 
+                                                                        target="_blank"
+                                                                    >
+                                                                        <img className="tx-coin-img" src={coinImages[tokenSymbol]} alt={tokenSymbol} />
+                                                                    </a>
+                                                                </CTableHeaderCell>
+                                                                <CTableDataCell>{tokenAmount}</CTableDataCell>
+                                                                <CTableDataCell>{usdAmount}</CTableDataCell>
+                                                                <CTableDataCell>
+                                                                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                                                                        {tags.map((tag, index) => {
+                                                                            let tagColor = util.getTagColor(tag)
+                                                                            return (
+                                                                                <div 
+                                                                                    className='tag-in-table'
+                                                                                    style={{backgroundColor: tagColor}}
+                                                                                >
+                                                                                    {tag}
+                                                                                </div>
+                                                                            )
+                                                                        })}
+                                                                    </div>
+                                                                </CTableDataCell>
+                                                            </CTableRow>
+                                                        )}
+                                                    )}
+                                                </CTableBody>
+                                            </CTable>
+                                        </CTableHeaderCell>
+                                    </CTableRow>
+                                </>
                             );}
                         )
                     }
@@ -185,71 +279,3 @@ const TxTable = (props) => {
 }
 
 export default TxTable
-
-
-/*
-
-
-<>
-            <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead color="light">
-                    <CTableRow>
-                    <CTableHeaderCell className="text-center">Transaction Hash</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">From</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">To</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Coin(s)</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Coin Amount</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">USD Amount (Then)</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Tags</CTableHeaderCell>
-                    </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                    {tableExample.map((item, index) => (
-                    <CTableRow v-for="item in tableItems" key={index}>
-                        <CTableDataCell className="text-center">
-                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                        <div>{item.user.name}</div>
-                        <div className="small text-medium-emphasis">
-                            <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
-                            {item.user.registered}
-                        </div>
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                        <div className="clearfix">
-                            <div className="float-start">
-                            <strong>{item.usage.value}%</strong>
-                            </div>
-                            <div className="float-end">
-                            <small className="text-medium-emphasis">{item.usage.period}</small>
-                            </div>
-                        </div>
-                        <CProgress thin color={item.usage.color} value={item.usage.value} />
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.payment.icon} />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                        <div className="small text-medium-emphasis">Last login</div>
-                        <strong>{item.activity}</strong>
-                        </CTableDataCell>
-                        <CTableDataCell>
-                        <CButton color="primary" disabled>
-                            {item.tags[0].tag}
-                        </CButton>
-                        {item.tags[1] && <CButton color="primary" disabled>
-                            {item.tags[1].tag}
-                        </CButton>}
-                        </CTableDataCell>
-                    </CTableRow>
-                    ))}
-                </CTableBody>
-            </CTable>
-        </>
-
-
-*/
