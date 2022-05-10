@@ -14,7 +14,13 @@ import {
   CListGroup,
   CListGroupItem,
   CFormSelect,
+  CContainer,
+  CRow,
+  CCol,
+  CFormInput,  
 } from '@coreui/react'
+
+import CreatableSelect from 'react-select/creatable';
 
 import CIcon from '@coreui/icons-react'
 import {
@@ -51,7 +57,35 @@ const Mainpage = () => {
   
   const [fields, setFields] = useState([])
   
-  const [food, setFood] = useState(['Grant', 'Payout', 'Expense'])
+  //The filter states
+  const [walletAddresses, setWalletAddresses] = useState([])
+  const [newWalletAddress, setNewWalletAddress] = useState({NewAddressChain: "Hedera"});
+  const [tags, setTags] = useState([]);
+  const [coins, setCoins] = useState([])
+  const [senderAddresses, setSenderAddresses] = useState([]);
+  const [reciepientAddresses, setReciepientAddresses] = useState([]);
+
+  
+  console.log(coins);
+  console.log(senderAddresses);
+  console.log(reciepientAddresses);
+  console.log(newWalletAddress);
+  console.log(walletAddresses);
+
+  const handleChange = (e) => {
+    const value = e.target.value
+    const name = e.target.name
+
+    setNewWalletAddress((prevState) => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
+  const handleAddressSubmit = (e) => {
+    e.preventDefault();
+    setWalletAddresses(walletAddresses => [...walletAddresses, newWalletAddress]);
+  }
 
   useEffect(() => {
     setData(processedData);
@@ -60,27 +94,78 @@ const Mainpage = () => {
 
   return (
     <>
-      <CFormSelect
-      aria-label="Default select example"
-      options={[
-        'Open this select menu',
-        { label: 'One', value: '1' },
-        { label: 'Two', value: '2' },
-        { label: 'Three', value: '3', disabled: true }
-      ]}
-      />
-      <Multiselect
-        isObject={false}
-        onRemove={(event) => {
-          console.log(event);
-        }}
-        onSelect={(event) => {
-          console.log(event);
-        }}
-        options={food}
-        selectedValues={["Grant"]}
-        showCheckbox
-      />
+      <CContainer>
+        <CRow>
+          <CCol sm="auto">{walletAddresses[0] ? walletAddresses[0].NewAddressChain : "Chain"}</CCol>
+          <CCol sm="auto">{walletAddresses[0] ? walletAddresses[0].NewAddress : "Address"}</CCol>
+          <CCol sm="auto">Add Address</CCol>
+          <CCol sm="auto">
+            <CFormSelect
+              placeholder="Select Chain"
+              aria-label="Default select example"
+              options={['Hedera', 'Ethereum',]}
+              name="NewAddressChain"
+              onChange={handleChange}
+            />
+          </CCol>
+          <CCol sm="auto">
+            <CFormInput 
+              type="text" 
+              placeholder="Enter address" 
+              aria-label="default input example"
+              name="NewAddress"
+              onChange={handleChange}
+            />
+          </CCol>
+          <CCol>
+            <CButton color="info" onClick={handleAddressSubmit}>Add Address</CButton>
+          </CCol>
+        </CRow>
+      </CContainer>
+
+      <CContainer>
+        <CRow>
+          <CCol sm="auto">Filter:</CCol>
+          <CCol sm="auto">
+          <CreatableSelect
+            isMulti
+            onChange={setTags}
+            options={[]}
+            placeholder="Add tags" 
+          />
+          </CCol>
+          <CCol sm="auto">
+          <CreatableSelect
+            isMulti
+            onChange={setCoins}
+            options={[]}
+            placeholder="Add coins" 
+          />
+          </CCol>
+          <CCol sm="auto">
+          <CreatableSelect
+            isMulti
+            onChange={setSenderAddresses}
+            options={[]}
+            placeholder="Add sender addresses" 
+          />
+          </CCol>
+          <CCol sm="auto">
+          <CreatableSelect
+            isMulti
+            onChange={setReciepientAddresses}
+            options={[]}
+            placeholder="Add receiver addresses" 
+          />
+          </CCol>     
+        </CRow>
+      </CContainer>
+
+      <CContainer>
+        <CRow>
+          <CCol sm="auto">All Transactions</CCol>
+        </CRow>
+      </CContainer>
 
       <TxTable fields={fields} data={data} address={address} />
     </>
