@@ -51,3 +51,51 @@ img.navbarIcon {
 img.sidebar-logo-full {
     width: 80%;
 }
+
+.text-with-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.lorge-col {
+    width: 200px;
+    max-width: 200px;
+}
+
+.smol-col {
+    width: 150px;
+    max-width: 150px;
+}
+
+.tags-col {
+    min-width: 200px;
+}
+
+a.etherscan-link {
+    
+}
+
+img.tx-coin-img {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.tag-in-table{
+    height: 40px;
+    align-items: center;
+    background-color: map.get($colors, green);
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.cointainer-lg {
+    background-color: map.get($colors, black-light);
+}
+
+.table-responsive {
+    // background-color: map.get($colors, black-light);
+}
