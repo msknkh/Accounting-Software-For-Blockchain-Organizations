@@ -2,14 +2,6 @@
 import { useEffect, useState } from 'react'
 
 import {
-  CAvatar,
-  CProgress,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
   CButton,
   CListGroup,
   CListGroupItem,
@@ -24,29 +16,17 @@ import CreatableSelect from 'react-select/creatable';
 
 import CIcon from '@coreui/icons-react'
 import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
   cifUs,
   cilPeople,
 } from '@coreui/icons'
-
-import Multiselect from 'multiselect-react-dropdown'
 
 import processedData from 'src/processed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json'
 import TxTable from 'src/components/TxTable'
 
 const Mainpage = () => {
+  //States for the table
   const [data, setData] = useState([])
-  const [address, setAddress] = useState('0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb')
+  const [daoAddress, setDaoAddress] = useState('0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb')
   
   const [fields, setFields] = useState([])
   
@@ -64,6 +44,30 @@ const Mainpage = () => {
   console.log(reciepientAddresses);
   console.log(newWalletAddress);
   console.log(walletAddresses);
+  console.log(tags);
+
+  //State variable we use to store our user's public wallet.
+  const [currentAccount, setCurrentAccount] = useState("");
+
+  //Implement your connectWallet method here
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (!ethereum) {
+        alert("Get MetaMask!");
+        return;
+      }
+
+      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+
+      console.log("Connected", accounts[0]);
+      setCurrentAccount(accounts[0]);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   const handleChange = (e) => {
     const value = e.target.value
@@ -75,7 +79,7 @@ const Mainpage = () => {
     }))
   }
 
-  const handleAddressSubmit = (e) => {
+  const handleAddressSubmit = async (e) => {
     e.preventDefault();
     setWalletAddresses(walletAddresses => [...walletAddresses, newWalletAddress]);
   }
@@ -158,9 +162,16 @@ const Mainpage = () => {
         <CRow>
           <CCol sm="auto">All Transactions</CCol>
         </CRow>
+        {!currentAccount && (
+        <CRow>
+          <CCol sm="auto">
+            <CButton color="info" onClick={connectWallet}>Connect wallet to edit tags</CButton>
+          </CCol>
+        </CRow>
+        )}
       </CContainer>
 
-      <TxTable fields={fields} data={data} address={address} />
+      <TxTable fields={fields} data={data} address={daoAddress} userAddress={currentAccount}/>
     </>
   )
 }

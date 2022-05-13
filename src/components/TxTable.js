@@ -18,6 +18,9 @@ import {
 
 import CIcon from '@coreui/icons-react'
 
+import addEditorAddress from './hedera/EditorAddressAdd.js';
+import checkEditorAddress from './hedera/EditorAddressCheck.js';
+
 import BAT from 'src/assets/images/coins/BAT.png'
 import DAI from 'src/assets/images/coins/DAI.png'
 import ETH from 'src/assets/images/coins/ETH.png'
@@ -32,6 +35,7 @@ const TxTable = (props) => {
     const data = props.data;
     const aggregateData = {};
     const fields = props.fields;
+    const userAddress = props.userAddress;
     const [usdAmountFor, setUsdAmountFor] = useState("Now")
 
     const coinImages = {
@@ -48,6 +52,19 @@ const TxTable = (props) => {
 
     const usdAmountForToggle = () => {
         setUsdAmountFor((usdAmountFor==="Now") ? ("Then") : ("Now"));
+    }
+
+    const handleAddTag = async () => {
+
+        if(userAddress !== ""){
+            const isEditor = await checkEditorAddress('polywrap', userAddress);
+            
+            if(isEditor) {console.log("Edit is allowed");}
+            else {alert("Edit is not allowed for this user address.");}
+
+        } else {
+            alert("Please connect with your metamask account");
+        }
     }
 
     const util = {
@@ -259,6 +276,7 @@ const TxTable = (props) => {
                                                                                 </div>
                                                                             )
                                                                         })}
+                                                                        <CButton color="info" onClick={handleAddTag}>Add Tag</CButton>
                                                                     </div>
                                                                 </CTableDataCell>
                                                             </CTableRow>
