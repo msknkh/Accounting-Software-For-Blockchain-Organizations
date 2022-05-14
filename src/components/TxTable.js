@@ -103,7 +103,7 @@ const TxTable = (props) => {
                     } else {
                         result.coinAmount = '---------'
                     }
-                    result.usdAmountFor += txData.tokenTransfers[i]
+                    result.usdAmountThen += txData.usdTransfer[i]
                     for (let tag of txData.tags[i]){
                         if (!(result.tags.includes(tag))){
                             result.tags.push(tag)
@@ -121,7 +121,7 @@ const TxTable = (props) => {
                 })
             }
 
-            result.usdAmountThen = result.coinAmount
+            // result.usdAmountThen = result.coinAmount
             result.tags.push(txData.txType)
 
             return result
@@ -230,7 +230,7 @@ const TxTable = (props) => {
                                                         let tokenSymbol = parentTxObj.tokenSymbol[cIndex].toUpperCase()
                                                         let tokenAddress = parentTxObj.tokenAddress[cIndex]
                                                         let tokenAmount = parentTxObj.tokenTransfers[cIndex]
-                                                        let usdAmount = parentTxObj.tokenTransfers[cIndex]
+                                                        let usdAmount = parentTxObj.usdTransfer[cIndex]
                                                         let tags = parentTxObj.tags[cIndex]
                                                         if (tags[0] === "Ignore") return (<></>)
                                                         return (
