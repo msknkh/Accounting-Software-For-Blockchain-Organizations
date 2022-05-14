@@ -20,7 +20,7 @@ import {
   cilPeople,
 } from '@coreui/icons'
 
-import processedData from 'src/processed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json'
+import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json'
 import TxTable from 'src/components/TxTable'
 
 const Mainpage = () => {
