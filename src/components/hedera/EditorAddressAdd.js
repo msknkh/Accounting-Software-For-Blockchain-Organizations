@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Client, AccountId, PrivateKey, ContractFunctionParameters, ContractExecuteTransaction, ContractCallQuery, Hbar } from "@hashgraph/sdk";
 import operator from "../../secretKeys.js";
 
