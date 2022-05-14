@@ -122,7 +122,7 @@ const TxTable = (props) => {
             }
 
             // result.usdAmountThen = result.coinAmount
-            result.tags.push(txData.txType)
+            if (txData.txType.toUpperCase() === 'Untagged'.toUpperCase()) result.tags.push(txData.txType)
 
             return result
         },

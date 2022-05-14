@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-const Mainpage = React.lazy(() => import('./views/mainpage/Mainpage'))
+const AllTxsPage = React.lazy(() => import('./views/alltxspage/AllTxsPage'))
 
 const IncomeTxsPage = React.lazy(() => import('./views/incometxs/IncomeTxsPage'))
 const ExpenseTxsPage = React.lazy(() => import('./views/expensetxs/ExpenseTxsPage'))
@@ -66,7 +66,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
-  { path: '/mainpage', name: 'Mainpage', element: Mainpage },
+  { path: '/all-txs', name: 'All Transactions', element: AllTxsPage },
   { path: '/income-txs', name: 'Income', element: IncomeTxsPage },
   { path: '/expense-txs', name: 'Expenses', element: ExpenseTxsPage },
   { path: '/untagged-txs', name: 'Un-tagged', element: UntaggedTxsPage },

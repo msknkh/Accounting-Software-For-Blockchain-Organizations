@@ -22,7 +22,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'All Transactions',
-    to: '/mainpage',
+    to: '/all-txs',
     icon: <img src={allTxIcon} alt="income tx" className="navbarIcon" />,
   },
   {

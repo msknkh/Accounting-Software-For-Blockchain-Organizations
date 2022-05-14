@@ -14,7 +14,7 @@ import CreatableSelect from 'react-select/creatable';
 
 import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json'
 import TxTable from 'src/components/TxTable'
-import {filter} from './mainpage.utils';
+import { filter, filterByTxType } from './AllTxsPage.utils';
 
 const Mainpage = (props) => {
 
@@ -81,8 +81,10 @@ const Mainpage = (props) => {
   useEffect(() => {
     setData(processedData);
     setFields(['TxHash', 'Sender', 'Recipient', 'Coins', 'Coin Amount', 'USD Amount', 'Tags'])
-    if (props.state == "Income"){
-      setTags([{value: "Income"}]);
+  
+    if ('state' in props){
+      console.log("l1", props, 'state' in props)
+      setData(filterByTxType(props.state, processedData))
     }
   }, [])
 
