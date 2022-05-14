@@ -2,6 +2,18 @@ import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Mainpage = React.lazy(() => import('./views/mainpage/Mainpage'))
+
+const IncomeTxsPage = React.lazy(() => import('./views/incometxs/IncomeTxsPage'))
+const ExpenseTxsPage = React.lazy(() => import('./views/expensetxs/ExpenseTxsPage'))
+const UntaggedTxsPage = React.lazy(() => import('./views/untaggedtxs/UntaggedTxsPage'))
+const ContributorGasPage = React.lazy(() => import('./views/contributorpage/ContributorGasPage'))
+const MultisendCSVMaker = React.lazy(() => import('./views/csvmakerpage/MultisendCSVMaker'))
+const Treasury = React.lazy(() => import('./views/treasury/Treasury'))
+const Summary = React.lazy(() => import('./views/summary/Summary'))
+const PnL = React.lazy(() => import('./views/pnl/PnL'))
+const Projections = React.lazy(() => import('./views/projections/Projections'))
+const Taxes = React.lazy(() => import('./views/taxes/Taxes'))
+
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -55,6 +67,16 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/mainpage', name: 'Mainpage', element: Mainpage },
+  { path: '/income-txs', name: 'Income', element: IncomeTxsPage },
+  { path: '/expense-txs', name: 'Expenses', element: ExpenseTxsPage },
+  { path: '/untagged-txs', name: 'Un-tagged', element: UntaggedTxsPage },
+  { path: '/contributor-gas-dues', name: 'Contributor Gas Dues', element: ContributorGasPage },
+  { path: '/make-multisend-csv', name: 'Make Multisend CSV', element: MultisendCSVMaker },
+  { path: '/treasury', name: 'Treasury', element: Treasury },
+  { path: '/summary', name: 'Summary', element: Summary },
+  { path: '/pnl', name: 'Profit & Loss', element: PnL },
+  { path: '/projections', name: 'Projections', element: Projections },
+  { path: '/taxes', name: 'Taxes (v0.1)', element: Taxes },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
