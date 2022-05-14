@@ -25,27 +25,6 @@ class App extends Component {
           <Routes>
             <Route exact path="/login" name="Login Page" element={<Login />} />
             <Route exact path="/register" name="Register Page" element={<Register />} />
-            <Route exact path="/income-txs" name="Income" element={<Page404 />} />
-            <Route exact path="/expense-txs" name="Expenses" element={<Page404 />} />
-            <Route exact path="/untagged-txs" name="Un-tagged" element={<Page404 />} />
-            <Route
-              exact
-              path="/contributor-gas-dues"
-              name="Contributor Gas Dues"
-              element={<Page404 />}
-            />
-            <Route
-              exact
-              path="/make-multisend-csv"
-              name="Make Multisend CSV"
-              element={<Page404 />}
-            />
-            <Route exact path="/treasury" name="Treasury" element={<Page404 />} />
-            <Route exact path="/summary" name="Summary" element={<Page404 />} />
-            <Route exact path="/pnl" name="Profit &amp; Loss" element={<Page404 />} />
-            <Route exact path="/projections" name="Projections" element={<Page404 />} />
-            <Route exact path="/taxes" name="Taxes (v0.1)" element={<Page404 />} />
-            <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
