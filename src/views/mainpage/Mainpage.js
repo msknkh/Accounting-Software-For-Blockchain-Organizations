@@ -16,7 +16,8 @@ import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee
 import TxTable from 'src/components/TxTable'
 import {filter} from './mainpage.utils';
 
-const Mainpage = () => {
+const Mainpage = (props) => {
+
   //States for the table
   const [data, setData] = useState([])
   const [daoAddress, setDaoAddress] = useState('0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb')
@@ -31,7 +32,7 @@ const Mainpage = () => {
   const [senderAddresses, setSenderAddresses] = useState([]);
   const [reciepientAddresses, setReciepientAddresses] = useState([]);
 
-  
+
   console.log(coins);
   console.log(senderAddresses);
   console.log(reciepientAddresses);
@@ -80,6 +81,9 @@ const Mainpage = () => {
   useEffect(() => {
     setData(processedData);
     setFields(['TxHash', 'Sender', 'Recipient', 'Coins', 'Coin Amount', 'USD Amount', 'Tags'])
+    if (props.state == "Income"){
+      setTags([{value: "Income"}]);
+    }
   }, [])
 
   return (

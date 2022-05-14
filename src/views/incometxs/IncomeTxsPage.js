@@ -13,6 +13,7 @@ import {
 } from '@coreui/react'
 
 import CreatableSelect from 'react-select/creatable';
+import Mainpage from '../mainpage/Mainpage';
 
 import CIcon from '@coreui/icons-react'
 import {
@@ -24,7 +25,7 @@ import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee
 import TxTable from 'src/components/TxTable'
 
 const IncomeTxsPage = () => {
-    return (<div></div>);
+    return (<Mainpage state="Income"></Mainpage>);
 }
 
 export default IncomeTxsPage
