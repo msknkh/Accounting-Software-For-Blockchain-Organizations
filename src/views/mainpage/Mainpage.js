@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react'
 
 import {
   CButton,
-  CListGroup,
-  CListGroupItem,
   CFormSelect,
   CContainer,
   CRow,
@@ -14,14 +12,9 @@ import {
 
 import CreatableSelect from 'react-select/creatable';
 
-import CIcon from '@coreui/icons-react'
-import {
-  cifUs,
-  cilPeople,
-} from '@coreui/icons'
-
 import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json'
 import TxTable from 'src/components/TxTable'
+import {filter} from './mainpage.utils';
 
 const Mainpage = () => {
   //States for the table
@@ -171,7 +164,7 @@ const Mainpage = () => {
         )}
       </CContainer>
 
-      <TxTable fields={fields} data={data} address={daoAddress} userAddress={currentAccount}/>
+      <TxTable fields={fields} data={filter(tags, coins, senderAddresses, reciepientAddresses, data)} address={daoAddress} userAddress={currentAccount}/>
     </>
   )
 }
