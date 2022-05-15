@@ -37,6 +37,7 @@ const TxTable = (props) => {
     const fields = props.fields;
     const userAddress = props.userAddress;
     const [usdAmountFor, setUsdAmountFor] = useState("Now")
+    let tagsMapping = {};
 
     const coinImages = {
         "BAT": BAT,
@@ -107,6 +108,13 @@ const TxTable = (props) => {
                     for (let tag of txData.tags[i]){
                         if (!(result.tags.includes(tag))){
                             result.tags.push(tag)
+                            let key = `${txData.from[i]}_${txData.to[i]}`;
+                            if(!tagsMapping[key]){
+                                tagsMapping[key] = new Set();
+                                tagsMapping[key] = tagsMapping[key].add(tag);
+                            } else {
+                                tagsMapping[key] = tagsMapping[key].add(tag);
+                            }
                         }
                     }
                 }
@@ -135,6 +143,9 @@ const TxTable = (props) => {
             // while (x%10 == 0) {x = Math.floor(x/10);}
 
             return colors[x%10];
+        },
+        addTagData: (from,to,tag) => {
+            
         }
     }
 
