@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState } from 'react'
+import { useState, useEffect, useDebugValue } from 'react'
 
 import {
   CAvatar,
@@ -14,9 +14,12 @@ import {
   CListGroup,
   CListGroupItem,
   CFormSelect,
+  CFormInput
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
+
+import CreatableSelect from 'react-select/creatable';
 
 import addEditorAddress from './hedera/EditorAddressAdd.js';
 import checkEditorAddress from './hedera/EditorAddressCheck.js';
@@ -32,11 +35,30 @@ import USDT from 'src/assets/images/coins/USDT.png'
 import WBTC from 'src/assets/images/coins/WBTC.png'
 
 const TxTable = (props) => {
-    const data = props.data;
+    const propsData = props.data;
     const aggregateData = {};
     const fields = props.fields;
     const userAddress = props.userAddress;
     const [usdAmountFor, setUsdAmountFor] = useState("Now")
+    const [data, setData] = useState(propsData);
+    
+    useEffect(() => {
+      setData(propsData);
+    });
+    
+    //Tag suggestion
+    const tagsMapping = {};
+
+    
+    //Logic for tag addition on edit 
+
+    const [tag, setTag] = useState("Expense");
+
+    const handleChange = (e) => {
+        const value = e.target.value
+        const name = e.target.name
+        setTag(value);
+    }
 
     const coinImages = {
         "BAT": BAT,
@@ -54,17 +76,34 @@ const TxTable = (props) => {
         setUsdAmountFor((usdAmountFor==="Now") ? ("Then") : ("Now"));
     }
 
-    const handleAddTag = async () => {
+    const handleTagAddition = (parentTxHash, cIndex) => {
+        const obj = data;
+        obj[parentTxHash].tags[cIndex].push(tag);
+        setData(obj);
+        setData({ ...data });
+
+    }
+
+    const handleAddTag = async (fromAddress, toAddress, tags) => {
 
         if(userAddress !== ""){
             const isEditor = await checkEditorAddress('polywrap', userAddress);
             
-            if(isEditor) {console.log("Edit is allowed");}
+            if(isEditor) {
+                const suggestedTags = tagsMapping[fromAddress + '_' + toAddress];
+                for (let tag of tags){
+                    suggestedTags.delete(tag);
+                }
+                console.log(suggestedTags);
+                alert(`You have tag suggestions:  ${Array.from(suggestedTags).toString()}`);
+                
+            }
             else {alert("Edit is not allowed for this user address.");}
 
         } else {
             alert("Please connect with your metamask account");
         }
+
     }
 
     const util = {
@@ -107,6 +146,13 @@ const TxTable = (props) => {
                     for (let tag of txData.tags[i]){
                         if (!(result.tags.includes(tag))){
                             result.tags.push(tag)
+                            let key = `${txData.from[i]}_${txData.to[i]}`;
+                            if(!tagsMapping[key]){
+                                tagsMapping[key] = new Set();
+                                tagsMapping[key] = tagsMapping[key].add(tag);
+                            } else {
+                                tagsMapping[key] = tagsMapping[key].add(tag);
+                            }
                         }
                     }
                 }
@@ -226,6 +272,8 @@ const TxTable = (props) => {
                                                 </CTableHead>
                                                 <CTableBody>
                                                     {parentTxObj.from.map((fromAddress, cIndex) => {
+                                                        //console.log(parentTxObj);
+                                                        //console.log(pIndex, cIndex);
                                                         let toAddress = parentTxObj.to[cIndex]
                                                         let tokenSymbol = parentTxObj.tokenSymbol[cIndex].toUpperCase()
                                                         let tokenAddress = parentTxObj.tokenAddress[cIndex]
@@ -276,7 +324,15 @@ const TxTable = (props) => {
                                                                                 </div>
                                                                             )
                                                                         })}
-                                                                        <CButton color="info" onClick={handleAddTag}>Add Tag</CButton>
+                                                                    
+                                                                        <CButton color="info" onClick={() => handleAddTag(fromAddress, toAddress, tags)}>Add Tag</CButton>
+                                                                        <CFormSelect 
+                                                                            aria-label="Select Tag"
+                                                                            options={['Expense', 'Income', 'Grants', 'NFT Sale Income']}
+                                                                            onChange={handleChange}
+                                                                            />
+                                                                        <CButton color="info" onClick={() => handleTagAddition(parentTxHash, cIndex)}>Add Tag to object</CButton>
+
                                                                     </div>
                                                                 </CTableDataCell>
                                                             </CTableRow>

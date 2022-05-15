@@ -28,10 +28,9 @@ const Mainpage = (props) => {
   const [walletAddresses, setWalletAddresses] = useState([])
   const [newWalletAddress, setNewWalletAddress] = useState({NewAddressChain: "Hedera"});
   const [tags, setTags] = useState([]);
-  const [coins, setCoins] = useState([])
+  const [coins, setCoins] = useState([]);
   const [senderAddresses, setSenderAddresses] = useState([]);
   const [reciepientAddresses, setReciepientAddresses] = useState([]);
-
 
   console.log(coins);
   console.log(senderAddresses);
