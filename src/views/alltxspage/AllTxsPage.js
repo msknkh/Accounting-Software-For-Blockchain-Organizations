@@ -11,12 +11,35 @@ import {
 } from '@coreui/react'
 
 import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select/creatable';
 
 import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json'
 import TxTable from 'src/components/TxTable'
 import { filter, filterByTxType } from './AllTxsPage.utils';
 
-const Mainpage = (props) => {
+import BAT from 'src/assets/images/coins/BAT.png'
+import DAI from 'src/assets/images/coins/DAI.png'
+import ETH from 'src/assets/images/coins/ETH.png'
+import HBAR from 'src/assets/images/coins/HBAR.png'
+import MANA from 'src/assets/images/coins/MANA.png'
+import UNI from 'src/assets/images/coins/UNI.png'
+import USDC from 'src/assets/images/coins/USDC.png'
+import USDT from 'src/assets/images/coins/USDT.png'
+import WBTC from 'src/assets/images/coins/WBTC.png'
+
+const AllTxsPage = (props) => {
+
+  const coinImages = {
+    "BAT": BAT,
+    "DAI": DAI,
+    "ETH": ETH,
+    "HBAR": HBAR,
+    "MANA": MANA,
+    "UNI": UNI,
+    "USDC": USDC,
+    "USDT": USDT,
+    "WBTC": WBTC,
+  }
 
   //States for the table
   const [data, setData] = useState([])
@@ -25,8 +48,9 @@ const Mainpage = (props) => {
   const [fields, setFields] = useState([])
   
   //The filter states
-  const [walletAddresses, setWalletAddresses] = useState([])
-  const [newWalletAddress, setNewWalletAddress] = useState({NewAddressChain: "Hedera"});
+  const [walletAddresses, setWalletAddresses] = useState([['ETH', '0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb']])
+  const [newWalletAddressChain, setNewWalletAddressChain] = useState('ETH');
+  const [newWalletAddress, setNewWalletAddress] = useState(['ETH', ""]);
   const [tags, setTags] = useState([]);
   const [coins, setCoins] = useState([]);
   const [senderAddresses, setSenderAddresses] = useState([]);
@@ -63,18 +87,21 @@ const Mainpage = (props) => {
 
 
   const handleChange = (e) => {
+    console.log("debug", newWalletAddressChain)
     const value = e.target.value
     const name = e.target.name
 
-    setNewWalletAddress((prevState) => ({
-      ...prevState,
-      [name]: value
-    }))
+    setNewWalletAddress([newWalletAddressChain, value])
   }
 
   const handleAddressSubmit = async (e) => {
     e.preventDefault();
     setWalletAddresses(walletAddresses => [...walletAddresses, newWalletAddress]);
+  }
+
+  const handleNewWalletAddressChainChange = async (e) => {
+    console.log(e.value)
+    setNewWalletAddressChain(e.value);
   }
 
   useEffect(() => {
@@ -91,16 +118,34 @@ const Mainpage = (props) => {
     <>
       <CContainer>
         <CRow>
-          <CCol sm="auto">{walletAddresses[0] ? walletAddresses[0].NewAddressChain : "Chain"}</CCol>
-          <CCol sm="auto">{walletAddresses[0] ? walletAddresses[0].NewAddress : "Address"}</CCol>
+          <CCol sm="auto">{walletAddresses[0] ? (
+            <a 
+              href={'https://etherscan.io/address/' + walletAddresses[0][1]}
+              target="_blank"
+            >
+              <img className="tx-coin-img" src={coinImages['ETH']} alt={'ETH'} />
+            </a>
+          ) : (
+            <a 
+              href='https://etherscan.io/address/0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb' 
+              target="_blank"
+            >
+              <img className="tx-coin-img" src={coinImages['ETH']} alt={'ETH'} />
+            </a>
+          )}</CCol>
+          <CCol sm="auto">{walletAddresses[0] ? walletAddresses[0][1] : "0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb"}</CCol>
           <CCol sm="auto">Add Address</CCol>
           <CCol sm="auto">
-            <CFormSelect
+            <Select
               placeholder="Select Chain"
-              aria-label="Default select example"
-              options={['Hedera', 'Ethereum',]}
+              aria-label="Select Chain"
+              options={[
+                { value: 'ETH', label: <div><img className='tx-coin-img' src={coinImages['ETH']} alt={'ETH'} /> Ethereum</div> },
+                { value: 'HBAR', label: <div><img className='tx-coin-img' src={coinImages['HBAR']} alt={'HBAR'} /> Hedera</div> },
+              ]}
+              defaultValue={{ value: 'ETH', label: <div><img className='tx-coin-img' src={coinImages['ETH']} alt={'ETH'} /> Ethereum</div> }}
               name="NewAddressChain"
-              onChange={handleChange}
+              onChange={handleNewWalletAddressChainChange}
             />
           </CCol>
           <CCol sm="auto">
@@ -113,7 +158,7 @@ const Mainpage = (props) => {
             />
           </CCol>
           <CCol>
-            <CButton color="info" onClick={handleAddressSubmit}>Add Address</CButton>
+            <CButton color="info" onClick={handleAddressSubmit}>Add</CButton>
           </CCol>
         </CRow>
       </CContainer>
@@ -174,4 +219,4 @@ const Mainpage = (props) => {
   )
 }
 
-export default Mainpage
+export default AllTxsPage
