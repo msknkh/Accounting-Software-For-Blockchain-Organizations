@@ -24,8 +24,22 @@ import {
   cilUserFemale,
 } from '@coreui/icons'
 
+import { 
+  aggregateInOut,
+  getQuarterlyData,
+  getYearlyData,
+  getFormattedIncomeUSDData,
+  getFormattedExpenseUSDData,
+  getFormattedIncomeUSDDataLivePrices,
+  getFormattedExpenseUSDDataLivePrices,
+  mergeDatasets,
+} from './Summary.util.js'
+
 const Summary = () => {
   const random = () => Math.round(Math.random() * 100)
+
+  console.log(aggregateInOut(processedData, '0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb'))
+  console.log(getFormattedIncomeUSDData(['ETH'], aggregateInOut(processedData, '0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb')).datasets[0].data)
 
   return (
 
