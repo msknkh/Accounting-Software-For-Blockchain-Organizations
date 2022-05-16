@@ -19,11 +19,10 @@ const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 const App = () => {
-
   const [address, setAddress] = useState('0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb')
   const value = { address, setAddress }
-    return (
-      <AddressContext.Provider value={value}>
+  return (
+    <AddressContext.Provider value={value}>
       <HashRouter>
         <Suspense fallback={loading}>
           <Routes>
@@ -34,9 +33,8 @@ const App = () => {
           </Routes>
         </Suspense>
       </HashRouter>
-      </AddressContext.Provider>
-    )
-
+    </AddressContext.Provider>
+  )
 }
 
 export default App

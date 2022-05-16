@@ -1,8 +1,8 @@
-import { createContext } from "react";
+import { createContext } from 'react'
 
 const AddressContext = createContext({
-    address: null,
-    setAddress: () => {}
-});
+  address: null,
+  setAddress: () => {},
+})
 
-export default AddressContext;
+export default AddressContext

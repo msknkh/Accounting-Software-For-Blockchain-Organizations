@@ -81,6 +81,7 @@ img.tx-coin-img {
     max-width: 30px;
     max-height: 30px;
     vertical-align: middle;
+    margin-right: 5px;
 }
 
 .tag-in-table{
@@ -119,7 +120,7 @@ img.tx-coin-img {
     border-radius: 10px;
     padding: 10px;
 }
-
+  
 .summary-page{
 //   display: flex;
 //   flex-direction: column;
@@ -128,5 +129,8 @@ img.tx-coin-img {
 .summary-container{
     float: left; 
     width: 50%; 
+}
 
+.total-value{
+    font-size: 36px;
 }
