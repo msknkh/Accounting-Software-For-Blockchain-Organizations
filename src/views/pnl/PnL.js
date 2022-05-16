@@ -45,7 +45,7 @@ import {
   mergeDatasets,
 } from 'src/views/summary/Summary.util.js'
 
-import { mergeCoinsData } from './PnL.util.js'
+import { mergeCoinsData } from 'src/views/pnl/PnL.util.js'
 
 import {
   filterByTag,
@@ -110,8 +110,10 @@ const PnL = () => {
       incomeObj['monthlyIncomeData'] = monthlyIncomeData
       incomeObj['incomeTableData'] = incomeTableData
       
+      console.log(tag, incomeObj)
       setIncomeTagsObj(prevState => [...prevState, incomeObj])
     }
+
 
     const [expenseTxs, monthlyExpenseData, expenseTableData] = txToObject(processedData)
     
@@ -134,6 +136,15 @@ const PnL = () => {
     }
   }, [])
 
+  const getColor = (name) => {
+    let colors = ['#28456c', '#89632a', '#69314c', '#373737', '#603b2c', '#854c1d', '#492f64', '#2b593f', '#6e3630', '#5a5a5a'];
+    let x = 0;
+    for (let c of name) 
+        x += (c.charCodeAt(0));
+
+    return colors[x%colors.length];
+  }
+
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -143,9 +154,7 @@ const PnL = () => {
       <CContainer style={{marginBottom: '15px'}}>
         <CRow >
             <CCol sm="3">
-              <button style={{borderColor: 'transparent'}} 
-              // onClick={handleNewRowSubmit}
-              >
+              <button style={{borderColor: 'transparent'}} >
                 <div>
                   <img className='tx-coin-img tilt-45' src={crossIcon} alt={'Add'} />
                   Add Income Tags
@@ -166,7 +175,6 @@ const PnL = () => {
                 ]}
                 name="NewCoinTransfer"
                 required
-                // onChange={handleNewPaymentCoin}
               />
             </CCol>
         </CRow>
@@ -195,8 +203,48 @@ const PnL = () => {
               })
             }
           </CTableRow>
-
-          
+          <CTableRow>
+            <CTableDataCell>
+              <div 
+                className='tag-in-table'
+                style={{backgroundColor: getColor('ERC20')}}
+              >
+                ERC20
+              </div>
+            </CTableDataCell>
+            <CTableDataCell>80,016.00</CTableDataCell>
+            <CTableDataCell>225,615.12</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+            <CTableDataCell>375,601.22</CTableDataCell>
+            <CTableDataCell>5.00</CTableDataCell>
+            <CTableDataCell>11,721.83</CTableDataCell>
+            <CTableDataCell>33.00</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+            <CTableDataCell>3,004,002.49</CTableDataCell>
+            <CTableDataCell>2,000,400.02</CTableDataCell>
+          </CTableRow>
+          <CTableRow>
+            <CTableDataCell>
+              <div 
+                className='tag-in-table'
+                style={{backgroundColor: getColor('native')}}
+              >
+                native
+              </div>
+            </CTableDataCell>
+            <CTableDataCell>2.60</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+            <CTableDataCell>10,565.42</CTableDataCell>
+            <CTableDataCell>89.50</CTableDataCell>
+            <CTableDataCell>7,931.19</CTableDataCell>
+            <CTableDataCell>41.39</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+            <CTableDataCell>0.00</CTableDataCell>
+          </CTableRow>
         </CTableBody>
       </CTable>
       
