@@ -100,6 +100,9 @@ const ContributorGasPage = () => {
           })}
         </CTableBody>
       </CTable>
+      <div style={{marginTop: '20px'}}>
+        <button className='csv-file-button'>Download CSV</button>
+      </div>
     </div>);
 }
 
