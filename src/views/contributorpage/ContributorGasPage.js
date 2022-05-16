@@ -30,6 +30,7 @@ import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee
 import TxTable from 'src/components/TxTable'
 
 import ETH from 'src/assets/images/coins/ETH.png'
+import { DocsCallout } from 'src/components'
 
 
 const ContributorGasPage = () => {
@@ -63,6 +64,13 @@ const ContributorGasPage = () => {
   //console.log(signeeGas);
 
     return (<div>
+      <CCol xs={12}>
+        <DocsCallout
+          name="Chart"
+          href="components/chart"
+          content="The DAO contributors spent the following gas fees up until now."
+        />
+      </CCol>
       <div style={{marginBottom:'20px'}}>
         <CContainer>
           <CRow>
