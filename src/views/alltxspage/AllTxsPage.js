@@ -139,6 +139,16 @@ const AllTxsPage = (props) => {
             </a>
           )}</CCol>
           <CCol sm="auto">{walletAddresses[0] ? walletAddresses[0][1] : "0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb"}</CCol>
+          {!currentAccount && (
+          <CCol sm="auto" style={{marginLeft: '150px'}}>
+            <CButton color="info" onClick={connectWallet}>Connect wallet to edit tags</CButton>
+          </CCol>
+        )}
+        </CRow>
+      </CContainer>  
+
+      <CContainer style={{marginTop: '20px'}}>
+        <CRow>
           <CCol sm="auto">Add Address</CCol>
           <CCol sm="auto">
             <Select
@@ -168,7 +178,7 @@ const AllTxsPage = (props) => {
         </CRow>
       </CContainer>
 
-      <CContainer>
+      <CContainer style={{marginTop: '20px'}}>
         <CRow>
           <CCol sm="auto">Filter:</CCol>
           <CCol sm="auto">
@@ -206,17 +216,10 @@ const AllTxsPage = (props) => {
         </CRow>
       </CContainer>
 
-      <CContainer>
+      <CContainer style={{marginTop: '40px'}}>
         <CRow>
-          <CCol sm="auto">All Transactions</CCol>
+          <CCol sm="auto"><h3>All Transactions</h3></CCol>
         </CRow>
-        {!currentAccount && (
-        <CRow>
-          <CCol sm="auto">
-            <CButton color="info" onClick={connectWallet}>Connect wallet to edit tags</CButton>
-          </CCol>
-        </CRow>
-        )}
       </CContainer>
 
       <TxTable fields={fields} data={filter(tags, coins, senderAddresses, reciepientAddresses, data)} address={daoAddress} userAddress={currentAccount}/>

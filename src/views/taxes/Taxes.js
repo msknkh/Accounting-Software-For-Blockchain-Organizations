@@ -24,7 +24,12 @@ import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee
 import TxTable from 'src/components/TxTable'
 
 const Taxes = () => {
-    return (<div></div>);
+  return (
+    <div>
+      <center><h1>Coming Soon!</h1></center>
+      <center><a href="https://www.figma.com/file/69OOUYzuGABKzHp8glHIyy/The-DAcc---DAO-Accounting-App?node-id=302%3A595" target='_blank'><h3>In the meantime, do checkout out our Figma Mockups!</h3></a></center>
+    </div>
+  );
 }
 
 export default Taxes
