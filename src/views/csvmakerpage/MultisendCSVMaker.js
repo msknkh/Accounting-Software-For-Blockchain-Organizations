@@ -188,7 +188,7 @@ const MultisendCSVMaker = (props) => {
 
               <CCol sm="2">
                 <CFormInput 
-                  type="number" 
+                  type="text" 
                   placeholder="Coin Amount" 
                   aria-label="Enter Coin Amount"
                   name="coinAmount"
@@ -198,7 +198,7 @@ const MultisendCSVMaker = (props) => {
 
               <CCol sm="2">
                 <CFormInput 
-                  type="number" 
+                  type="text" 
                   placeholder="USD Amount" 
                   aria-label="Enter USD Amount"
                   name="usdAmount"
