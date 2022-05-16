@@ -258,6 +258,6 @@ export const mergeDatasets = (data) => {
     }
 }
 
-const data = require('src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json');
-const monthlyData = aggregateInOut(data, '0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb')
-console.log(getFormattedIncomeUSDData(['ETH'], monthlyData).datasets[0].data)
+// const data = require('src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json');
+// const monthlyData = aggregateInOut(data, '0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb')
+// console.log(getFormattedIncomeUSDData(['ETH'], monthlyData).datasets[0].data)
