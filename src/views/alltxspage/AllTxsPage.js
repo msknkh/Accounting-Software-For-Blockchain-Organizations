@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   CButton,
@@ -27,7 +27,11 @@ import USDC from 'src/assets/images/coins/USDC.png'
 import USDT from 'src/assets/images/coins/USDT.png'
 import WBTC from 'src/assets/images/coins/WBTC.png'
 
+import AddressContext from 'src/context';
+
 const AllTxsPage = (props) => {
+
+  const {address, setAddress} = useContext(AddressContext);
 
   const coinImages = {
     "BAT": BAT,
@@ -48,7 +52,7 @@ const AllTxsPage = (props) => {
   const [fields, setFields] = useState([])
   
   //The filter states
-  const [walletAddresses, setWalletAddresses] = useState([['ETH', '0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb']])
+  const [walletAddresses, setWalletAddresses] = useState([['ETH', address]])
   const [newWalletAddressChain, setNewWalletAddressChain] = useState('ETH');
   const [newWalletAddress, setNewWalletAddress] = useState(['ETH', ""]);
   const [tags, setTags] = useState([]);
@@ -80,6 +84,7 @@ const AllTxsPage = (props) => {
 
       console.log("Connected", accounts[0]);
       setCurrentAccount(accounts[0]);
+
     } catch (error) {
       console.log(error)
     }
@@ -107,12 +112,12 @@ const AllTxsPage = (props) => {
   useEffect(() => {
     setData(processedData);
     setFields(['TxHash', 'Sender', 'Recipient', 'Coins', 'Coin Amount', 'USD Amount', 'Tags'])
-  
     if ('state' in props){
       console.log("l1", props, 'state' in props)
       setData(filterByTxType(props.state, processedData))
     }
   }, [])
+
 
   return (
     <>

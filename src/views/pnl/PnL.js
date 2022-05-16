@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import {
   CButton,
@@ -19,6 +19,8 @@ import {
 } from '@coreui/react'
 
 import CreatableSelect from 'react-select/creatable';
+import AddressContext from 'src/context';
+
 
 import CIcon from '@coreui/icons-react'
 import {
@@ -30,13 +32,16 @@ import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee
 import TxTable from 'src/components/TxTable'
 
 const PnL = () => {
+
+  const {address, setAddress} = useContext(AddressContext);
+
     return (<div>
           <CTable hover>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
             <CTableHeaderCell scope="col">Class</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
+            <CTableHeaderCell scope="col">{address}</CTableHeaderCell>
             <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
