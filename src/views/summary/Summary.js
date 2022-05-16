@@ -20,11 +20,7 @@ import {
 import { DocsCallout } from 'src/components'
 
 import {
-  cifUs,
-  cibTwitter,
   cilCloudDownload,
-  cilPeople,
-  cilUser,
   cilUserFemale,
 } from '@coreui/icons'
 
@@ -55,120 +51,132 @@ const Summary = () => {
           content="React wrapper component for Chart.js 3.0, the most popular charting library."
         />
       </CCol>
-      <CRow>
-        <CCol sm={3}>
-          <h4 id="traffic" className="card-title mb-0">
-            Traffic
-          </h4>
-          <div className="small text-medium-emphasis">January - July 2021</div>
-        </CCol>
-        <CCol sm={5} className="d-none d-md-block">
-          <CButton color="primary" className="float-end">
-            <CIcon icon={cilCloudDownload} />
-          </CButton>
-          <CButtonGroup className="float-end me-3">
-            {['Day', 'Month', 'Year'].map((value) => (
-              <CButton
-                color="outline-secondary"
-                key={value}
-                className="mx-0"
-                active={value === 'Month'}
-              >
-                {value}
-              </CButton>
-            ))}
-          </CButtonGroup>
-        </CCol>
-      </CRow>
-      <CRow>
+
       <CCol xs={8}>
-        <CCard className="mb-4">
-          <CCardHeader>Bar Chart</CCardHeader>
-          <CCardBody>
-            <CChartBar
-              data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [
-                  {
-                    label: '1 m',
-                    backgroundColor: '#f87979',
-                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-                  },
-                  {
-                    label: '',
-                    backgroundColor: '#f879a9',
-                    data: [1, 2, 13, 49, 1, 20, 39, 80, 40],
-                  },
-                  {
-                    label: 'GitHub Commits',
-                    backgroundColor: '#f87979',
-                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-                  },
-                ],
-              }}
-              labels="months"
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-      </CRow>
-      <CRow>
-        <CCol sm={3}>
-          <h4 id="traffic" className="card-title mb-0">
-            Traffic
-          </h4>
-          <div className="small text-medium-emphasis">January - July 2021</div>
+
+        <CRow>
+          <CCol xs={12}>
+            <CCard className="mb-4">
+              <CCardHeader>
+                <CRow>
+                  <CCol sm={5}>
+                    <h4 id="traffic" className="card-title mb-0">
+                      Traffic
+                    </h4>
+                    <div className="small text-medium-emphasis">January - July 2021</div>
+                  </CCol>
+                  <CCol sm={7} className="d-none d-md-block">
+                    <CButton color="primary" className="float-end">
+                      <CIcon icon={cilCloudDownload} />
+                    </CButton>
+                    <CButtonGroup className="float-end me-3">
+                      {['Day', 'Month', 'Year'].map((value) => (
+                        <CButton
+                          color="outline-secondary"
+                          key={value}
+                          className="mx-0"
+                          active={value === 'Month'}
+                        >
+                          {value}
+                        </CButton>
+                      ))}
+                    </CButtonGroup>
+                  </CCol>
+                </CRow>
+              </CCardHeader>
+              <CCardBody>
+                <CChartBar
+                  data={{
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [
+                      {
+                        label: '1 m',
+                        backgroundColor: '#f87979',
+                        data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
+                      },
+                      {
+                        label: '',
+                        backgroundColor: '#f879a9',
+                        data: [1, 2, 13, 49, 1, 20, 39, 80, 40],
+                      },
+                      {
+                        label: 'GitHub Commits',
+                        backgroundColor: '#f87979',
+                        data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
+                      },
+                    ],
+                  }}
+                  labels="months"
+                />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+
+
+        <CRow>
+        <CCol xs={12}>
+          <CCard className="mb-4">
+            <CCardHeader>
+              <CRow>
+                <CCol sm={5}>
+                  <h4 id="traffic" className="card-title mb-0">
+                    Traffic
+                  </h4>
+                  <div className="small text-medium-emphasis">January - July 2021</div>
+                </CCol>
+                <CCol sm={7} className="d-none d-md-block">
+                  <CButton color="primary" className="float-end">
+                    <CIcon icon={cilCloudDownload} />
+                  </CButton>
+                  <CButtonGroup className="float-end me-3">
+                    {['Day', 'Month', 'Year'].map((value) => (
+                      <CButton
+                        color="outline-secondary"
+                        key={value}
+                        className="mx-0"
+                        active={value === 'Month'}
+                      >
+                        {value}
+                      </CButton>
+                    ))}
+                  </CButtonGroup>
+                </CCol>
+              </CRow>
+            </CCardHeader>
+            <CCardBody>
+              <CChartBar
+                data={{
+                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                  datasets: [
+                    {
+                      label: '1 m',
+                      backgroundColor: '#f87979',
+                      data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
+                    },
+                    {
+                      label: '',
+                      backgroundColor: '#f879a9',
+                      data: [1, 2, 13, 49, 1, 20, 39, 80, 40],
+                    },
+                    {
+                      label: 'GitHub Commits',
+                      backgroundColor: '#f87979',
+                      data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
+                    },
+                  ],
+                }}
+                labels="months"
+              />
+            </CCardBody>
+          </CCard>
         </CCol>
-        <CCol sm={5} className="d-none d-md-block">
-          <CButton color="primary" className="float-end">
-            <CIcon icon={cilCloudDownload} />
-          </CButton>
-          <CButtonGroup className="float-end me-3">
-            {['Day', 'Month', 'Year'].map((value) => (
-              <CButton
-                color="outline-secondary"
-                key={value}
-                className="mx-0"
-                active={value === 'Month'}
-              >
-                {value}
-              </CButton>
-            ))}
-          </CButtonGroup>
-        </CCol>
-      </CRow>
-      <CRow>
-      <CCol xs={8}>
-        <CCard className="mb-4">
-          <CCardHeader>Bar Chart</CCardHeader>
-          <CCardBody>
-            <CChartBar
-              data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [
-                  {
-                    label: '1 m',
-                    backgroundColor: '#f87979',
-                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-                  },
-                  {
-                    label: '',
-                    backgroundColor: '#f879a9',
-                    data: [1, 2, 13, 49, 1, 20, 39, 80, 40],
-                  },
-                  {
-                    label: 'GitHub Commits',
-                    backgroundColor: '#f87979',
-                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-                  },
-                ],
-              }}
-              labels="months"
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-      </CRow>
+        </CRow>
+
+
+    </CCol>
+
+
       <CCol xs={4}>
         <CCard className="mb-4">
           <CCardHeader>Doughnut Chart</CCardHeader>
@@ -180,25 +188,6 @@ const Summary = () => {
                   {
                     backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
                     data: [40, 20, 80, 10],
-                  },
-                ],
-              }}
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={4}>
-        <CCard className="mb-4">
-          <CCardHeader>Pie Chart</CCardHeader>
-          <CCardBody>
-            <CChartPie
-              data={{
-                labels: ['Red', 'Green', 'Yellow'],
-                datasets: [
-                  {
-                    data: [300, 50, 100],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
                   },
                 ],
               }}
