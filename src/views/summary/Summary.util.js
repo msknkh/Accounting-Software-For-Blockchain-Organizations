@@ -154,8 +154,11 @@ export const getFormattedIncomeUSDData = (coins, data) => {
         labels: [],
         datasets: [],
     }
+
+    console.log(data);
     for (let coin of coins){
         coin = coin.toUpperCase()
+        console.log(coin);
         if (result.labels.length === 0) result.labels = Object.keys(data[coin])
 
         let datasetObject = {
