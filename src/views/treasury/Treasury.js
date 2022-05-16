@@ -9,7 +9,13 @@ import {
   CContainer,
   CRow,
   CCol,
-  CFormInput,  
+  CFormInput, 
+  CTable,
+  CTableHead,
+  CTableRow,
+  CTableHeaderCell,
+  CTableDataCell,
+  CTableBody
 } from '@coreui/react'
 
 import CreatableSelect from 'react-select/creatable';
@@ -22,37 +28,50 @@ import {
 
 import processedData from 'src/reprocessed-0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb.json'
 
-import { useMoralisWeb3Api } from "react-moralis";
-import { AddressBookQuery } from '@hashgraph/sdk';
-
-
-const Treasury = (props) => {
-  const Web3Api = useMoralisWeb3Api();
-
-  const [addresses, setAddresses] = useState([])
-  const [data, setData] = useState([])
-
-  const getTokenBalances = async (address) => {
-    const options = {
-      chain: 'eth',
-      address: address
-    }
-    const balances = await Web3Api.getAllERC20(options);
-    setData((prevData) => [...prevData, balances]);
-  }
-
-  useEffect(() => {
-    setAddresses([
-      ...addresses,
-      '0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb'
-    ])
-    for (let address of addresses){
-      getTokenBalances(address);
-    }
-    console.log(data);
-  }, [])
-
-  return (<div></div>);
+const Treasury = () => {
+    const [addresses, setAddresses] = useState([])
+    const [data, setData] = useState([])
+  
+    useEffect(() => {
+      setAddresses([
+        ...addresses,
+        '0x8c3fa50473065f1d90f186ca8ba1aa76aee409bb'
+      ])
+    }, [])
+    
+    return (
+      <div>
+        <CTable hover>
+          <CTableHead>
+            <CTableRow>
+              <CTableHeaderCell scope="col">#</CTableHeaderCell>
+              <CTableHeaderCell scope="col">Class</CTableHeaderCell>
+              <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
+              <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
+            </CTableRow>
+          </CTableHead>
+          <CTableBody>
+            <CTableRow>
+              <CTableHeaderCell scope="row">1</CTableHeaderCell>
+              <CTableDataCell>Mark</CTableDataCell>
+              <CTableDataCell>Otto</CTableDataCell>
+              <CTableDataCell>@mdo</CTableDataCell>
+            </CTableRow>
+            <CTableRow>
+              <CTableHeaderCell scope="row">2</CTableHeaderCell>
+              <CTableDataCell>Jacob</CTableDataCell>
+              <CTableDataCell>Thornton</CTableDataCell>
+              <CTableDataCell>@fat</CTableDataCell>
+            </CTableRow>
+            <CTableRow>
+              <CTableHeaderCell scope="row">3</CTableHeaderCell>
+              <CTableDataCell>Larry the Bird</CTableDataCell>
+              <CTableDataCell>Thornton</CTableDataCell>
+              <CTableDataCell>@twitter</CTableDataCell>
+            </CTableRow>
+          </CTableBody>
+        </CTable>
+      </div>);
 }
 
 export default Treasury

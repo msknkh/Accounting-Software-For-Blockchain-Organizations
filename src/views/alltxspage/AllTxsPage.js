@@ -52,10 +52,9 @@ const AllTxsPage = (props) => {
   const [newWalletAddressChain, setNewWalletAddressChain] = useState('ETH');
   const [newWalletAddress, setNewWalletAddress] = useState(['ETH', ""]);
   const [tags, setTags] = useState([]);
-  const [coins, setCoins] = useState([])
+  const [coins, setCoins] = useState([]);
   const [senderAddresses, setSenderAddresses] = useState([]);
   const [reciepientAddresses, setReciepientAddresses] = useState([]);
-
 
   console.log(coins);
   console.log(senderAddresses);
