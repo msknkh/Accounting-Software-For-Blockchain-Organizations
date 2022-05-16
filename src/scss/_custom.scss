@@ -80,6 +80,7 @@ a.etherscan-link {
 img.tx-coin-img {
     max-width: 30px;
     max-height: 30px;
+    vertical-align: middle;
 }
 
 .tag-in-table{
@@ -96,6 +97,25 @@ img.tx-coin-img {
     background-color: map.get($colors, black-light);
 }
 
-.table-responsive {
-    // background-color: map.get($colors, black-light);
+.csv-file-button {
+    background-image: radial-gradient(circle, map.get($colors, violet) 25%, map.get($colors, purple) 70%);
+    border-color: transparent;
+    border-radius: 5px;
+    width: 140px;
+    padding: 5px 10px 5px 10px;
+    margin-left: 10px;
+    color: white;
+}
+
+.tilt-45{
+    transform: rotate(45deg);
+}
+
+.csv-maker{
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    min-width: 80%;
+    min-height: 100px;
+    border-radius: 10px;
+    padding: 10px;
 }
