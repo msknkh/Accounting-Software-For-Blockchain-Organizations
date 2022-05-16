@@ -94,13 +94,10 @@ export const filterByField = (filterTerm, comparisionField, data) => {
 
 export const filterByTxType = (txType, data) => {
     let result = {};
-    console.log("l1", txType, data)
     Object.entries(data).map(([parentTxHash, parentTxObj]) => {
-        console.log("l1")
         if (txType.toUpperCase() === parentTxObj.txType.toUpperCase()){
             result[parentTxHash] = parentTxObj
         }
     })
-    console.log("l3", result)
     return result;
 }

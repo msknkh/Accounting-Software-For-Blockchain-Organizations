@@ -64,7 +64,7 @@ export const aggregateInOut = (data, address) => {
             if(!(txObj.tags[i].includes('Ignore'))){
                 if(txObj.tokenSymbol[i].search('NFT') === -1){
                     const coin = txObj.tokenSymbol[i].toUpperCase()
-                    if(txObj.from[i] === address) {
+                    if(txObj.from[i].toUpperCase() === address.toUpperCase()) {
                         result[coin][date].expense.amount += txObj.tokenTransfers[i]
                         result[coin][date].expense.usdAmount += txObj.usdTransfer[i]
                     } else {
