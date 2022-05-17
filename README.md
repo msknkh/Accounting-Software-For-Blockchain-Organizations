@@ -11,14 +11,38 @@
 - [Not yet implemented - on frontend] Facility to create and analyse Projections and checkout the taxes that the DAO owes to the state
 
 
-![DAO Books Main Page](https://drive.google.com/file/d/1bYmsfCw9-BEbqeBdKnZ1m1TgVfkblHUY/view?usp=sharing)
+![DAO Books Main Page](https://drive.google.com/file/d/1bYmsfCw9-BEbqeBdKnZ1m1TgVfkblHUY/view)
 
-![Profit And Loss Statement](https://drive.google.com/file/d/17_rFtb8lqTmbejSk1CVGAXoCyhxaGuJt/view?usp=sharing)
+![Profit And Loss Statement](https://drive.google.com/file/d/17_rFtb8lqTmbejSk1CVGAXoCyhxaGuJt/view)
 
-![Treasury](https://drive.google.com/file/d/1Gqrt3wUogxLL-1TAaBH0955hnaPUBJeW/view?usp=sharing)
+![Treasury](https://drive.google.com/file/d/1Gqrt3wUogxLL-1TAaBH0955hnaPUBJeW/view)
 
-![Dashboard](https://drive.google.com/file/d/1eGqmrIkNjvnS4yo6a0fecawP-5129KA8/view?usp=sharing)
+![Dashboard](https://drive.google.com/file/d/1eGqmrIkNjvnS4yo6a0fecawP-5129KA8/view)
 
-![Gas Fees](https://drive.google.com/file/d/1bP64Tv8u-GGAa4_nuoCGZ1-dnr5ZrT53/view?usp=sharing)
+![Gas Fees](https://drive.google.com/file/d/1bP64Tv8u-GGAa4_nuoCGZ1-dnr5ZrT53/view)
 
-![Multisend CSV](https://drive.google.com/file/d/15fcZ8XcFXFZpdV6XlRmG_KT-15Ptzri7/view?usp=sharing)
+![Multisend CSV](https://drive.google.com/file/d/15fcZ8XcFXFZpdV6XlRmG_KT-15Ptzri7/view)
+
+
+## Installation
+
+DAO Books frontend is made using React.js and backend is written in flask and python. It makes call to the hedera smart contract service written in javascript - [Github repo for hedera smart contracts](https://github.com/msknkh/hedera-backend) 
+
+To run DAO Books frontend :- 
+
+Install the dependencies and devDependencies and start the server. Note - Provide a secretKeys.js file as mentioned below. 
+
+```sh
+yarn install
+yarn start
+```
+
+You will have to provide a secretKeys.js file in the source directory providing the hedera test net credentials in the following format -
+
+> // HEDERA TESTNET CREDENTIALS
+> const operator = {
+> 	id: "...",
+> 	pvkey: ".."
+> };
+> export default operator;
+
