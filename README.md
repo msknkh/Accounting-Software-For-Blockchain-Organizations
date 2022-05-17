@@ -11,17 +11,17 @@
 - [Not yet implemented - on frontend] Facility to create and analyse Projections and checkout the taxes that the DAO owes to the state
 
 
-![DAO Books Main Page](/home/muskan/coreui-free-react-admin-template/src/assets/images/mainpage.png)
+![DAO Books Main Page](/src/assets/images/mainpage.png)
 
-![Profit And Loss Statement](/home/muskan/coreui-free-react-admin-template/src/assets/images/pnl.png)
+![Profit And Loss Statement](/src/assets/images/pnl.png)
 
-![Treasury](/home/muskan/coreui-free-react-admin-template/src/assets/images/treasury.png)
+![Treasury](/src/assets/images/treasury.png)
 
-![Dashboard](/home/muskan/coreui-free-react-admin-template/src/assets/images/summary2.png)
+![Dashboard](/src/assets/images/summary2.png)
 
-![Gas Fees](/home/muskan/coreui-free-react-admin-template/src/assets/images/gas.png)
+![Gas Fees](/src/assets/images/gas.png)
 
-![Multisend CSV](/home/muskan/coreui-free-react-admin-template/src/assets/images/make-multi.png)
+![Multisend CSV](/src/assets/images/make-multi.png)
 
 
 ## Installation
