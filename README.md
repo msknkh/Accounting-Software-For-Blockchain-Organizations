@@ -11,17 +11,17 @@
 - [Not yet implemented - on frontend] Facility to create and analyse Projections and checkout the taxes that the DAO owes to the state
 
 
-![DAO Books Main Page](https://drive.google.com/file/d/1bYmsfCw9-BEbqeBdKnZ1m1TgVfkblHUY/view)
+![DAO Books Main Page](/home/muskan/coreui-free-react-admin-template/src/assets/images/mainpage.png)
 
-![Profit And Loss Statement](https://drive.google.com/file/d/17_rFtb8lqTmbejSk1CVGAXoCyhxaGuJt/view)
+![Profit And Loss Statement](/home/muskan/coreui-free-react-admin-template/src/assets/images/pnl.png)
 
-![Treasury](https://drive.google.com/file/d/1Gqrt3wUogxLL-1TAaBH0955hnaPUBJeW/view)
+![Treasury](/home/muskan/coreui-free-react-admin-template/src/assets/images/treasury.png)
 
-![Dashboard](https://drive.google.com/file/d/1eGqmrIkNjvnS4yo6a0fecawP-5129KA8/view)
+![Dashboard](/home/muskan/coreui-free-react-admin-template/src/assets/images/summary2.png)
 
-![Gas Fees](https://drive.google.com/file/d/1bP64Tv8u-GGAa4_nuoCGZ1-dnr5ZrT53/view)
+![Gas Fees](/home/muskan/coreui-free-react-admin-template/src/assets/images/gas.png)
 
-![Multisend CSV](https://drive.google.com/file/d/15fcZ8XcFXFZpdV6XlRmG_KT-15Ptzri7/view)
+![Multisend CSV](/home/muskan/coreui-free-react-admin-template/src/assets/images/make-multi.png)
 
 
 ## Installation
@@ -39,10 +39,11 @@ yarn start
 
 You will have to provide a secretKeys.js file in the source directory providing the hedera test net credentials in the following format -
 
-> // HEDERA TESTNET CREDENTIALS
-> const operator = {
-> 	id: "...",
-> 	pvkey: ".."
-> };
-> export default operator;
-
+```
+// HEDERA TESTNET CREDENTIALS
+ const operator = {
+ 	id: "...",
+ 	pvkey: ".."
+ };
+ export default operator;
+```
